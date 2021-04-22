@@ -15,8 +15,10 @@ export class WebsocketService {
     this.subject.subscribe(
       msg => this.handleMessage(msg),
       err => this.handleError(err), 
-      () => console.log('complete')
+      () => this.Reconnecting
     );
+
+    this.checkConnection();
   }
 
   handleMessage(message: any){
@@ -34,19 +36,34 @@ export class WebsocketService {
 
   checkConnection(){
     let connectionPromise =  new Promise((resolve, reject) => {
-      let data  = new QueryModel("checkConnection")
-      let result =  this.subject.next(data);
-      if (result !== null) {
-        resolve(result);
+      let data  = new QueryModel("checkConnection");
+      this.subject.next(data);
+    });
+    connectionPromise
+    .then(err => {
+      this.retry--;
+      if( this.retry >= 0 ){
+        console.log(`retry: ${this.retry}`, err)
+        this.Reconnecting();
       }
-      else{
-        reject();
+    })
+    .catch(err => {
+      this.retry--;
+      if( this.retry >= 0 ){
+        console.log(`retry: ${this.retry}`, err)
+        this.Reconnecting();
       }
     });
-    
   }
 
-  connecting(){
-    
+  Reconnecting(){
+    this.retry--;
+    this.subject = webSocket("ws://localhost:8998");
+
+    this.subject.subscribe(
+      msg => this.handleMessage(msg),
+      err => this.handleError(err), 
+      () => console.log('complete')
+    );
   }
 }
