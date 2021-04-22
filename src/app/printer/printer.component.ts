@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PrinterService } from '../printer.service';
-import { HttpClient } from '@angular/common/http';
-
+import {WebsocketService} from './../services/websocket.service';
+import QueryModel from './../models/QueryModel';
 
 @Component({
   selector: 'app-printer',
@@ -11,24 +10,21 @@ import { HttpClient } from '@angular/common/http';
 export class PrinterComponent implements OnInit {
   
   elementId = 'invoice';
-  constructor(private printerService: PrinterService, private http: HttpClient) { 
-    
+  constructor(private webService: WebsocketService) { 
   }
 
   ngOnInit(): void {
-    this.printerService.startConnection();
-    this.printerService.addTransferChartDataListener();   
-    this.startHttpRequest();
-  }
-  private startHttpRequest = () => {
-    this.http.get('https://localhost:44393/hubs/clock')
-      .subscribe(res => {
-        console.log(res);
-      })
   }
 
-  printWindow(){
-    this.startHttpRequest();
+  async printWindow(){
+    console.log('PrinterComponent.printWindow()');
+
+    let check = document.getElementById('invoice');
+    let model = new QueryModel('printHtml');
+    model.data  = check !== null ? check.innerHTML : '';
+    console.log(JSON.stringify(model));
+
+    this.webService.send(model);
   }
 }
 

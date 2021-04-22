@@ -6,6 +6,7 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { PrinterComponent } from './printer/printer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { PrinterComponent } from './printer/printer.component';
     BrowserModule,
     NgxPrintModule,
     HttpClientModule,
-  
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
