@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import {Observable} from 'rxjs';
 import QueryModel from './../models/QueryModel';
 
 @Injectable({
@@ -11,14 +12,8 @@ export class WebsocketService {
   constructor() { 
     this.retry = 5;
     this.subject = webSocket("ws://localhost:8998");
-
-    this.subject.subscribe(
-      msg => this.handleMessage(msg),
-      err => this.handleError(err), 
-      () => this.Reconnecting
-    );
-
-    this.checkConnection();
+    this.setSubsribe();   
+    this.checkConnection(); 
   }
 
   handleMessage(message: any){
@@ -28,6 +23,7 @@ export class WebsocketService {
 
   handleError(error: any){
     console.log(error); 
+    this.reconnecting();
   }
   
   send(data: any){
@@ -38,32 +34,54 @@ export class WebsocketService {
     let connectionPromise =  new Promise((resolve, reject) => {
       let data  = new QueryModel("checkConnection");
       this.subject.next(data);
+      resolve(null);
     });
     connectionPromise
-    .then(err => {
-      this.retry--;
-      if( this.retry >= 0 ){
-        console.log(`retry: ${this.retry}`, err)
-        this.Reconnecting();
+    .then(()  => {
+      if(this.retry > 0 ){     
+        setTimeout(() => this.checkConnection(), 2000);
       }
     })
     .catch(err => {
       this.retry--;
-      if( this.retry >= 0 ){
-        console.log(`retry: ${this.retry}`, err)
-        this.Reconnecting();
+      if(this.subject.closed && this.retry > 0 ){
+        console.log(`retry: ${this.retry}`, err);
+        this.connecting();
       }
     });
   }
 
-  Reconnecting(){
-    this.retry--;
+  connecting(){
     this.subject = webSocket("ws://localhost:8998");
+    this.setSubsribe();
+    this.checkConnection();
+  }
 
+  private setSubsribe(){
     this.subject.subscribe(
       msg => this.handleMessage(msg),
       err => this.handleError(err), 
-      () => console.log('complete')
+      () => {
+        if(this.subject.closed && this.retry > 0){
+          this.retry--;
+          this.reconnecting();
+        }
+      }
     );
   }
+
+  reconnecting(){
+    if(this.retry == 0){
+      return;
+    }
+
+    this.retry--;
+    this.connecting()
+  }
+
+  forceReconnecting(){
+    this.retry = 5;
+    this.connecting();
+  }
+ 
 }

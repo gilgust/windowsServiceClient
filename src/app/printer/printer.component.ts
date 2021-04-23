@@ -16,7 +16,7 @@ export class PrinterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async printWindow(){
+  printWindow(){
     console.log('PrinterComponent.printWindow()');
 
     let check = document.getElementById('invoice');
@@ -25,6 +25,10 @@ export class PrinterComponent implements OnInit {
     console.log(JSON.stringify(model));
 
     this.webService.send(model);
+  }
+
+  reconnecting(){
+    this.webService.forceReconnecting();
   }
 }
 
