@@ -9,7 +9,7 @@ import PrintQueryModel from './../models/PrintQueryModel';
 })
 export class PrinterComponent implements OnInit {
 
-  checkId = 'check';
+  receiptId = 'receipt';
   invoiceId = 'invoice';
   constructor(private webService: WebsocketService) {
   }
@@ -17,8 +17,8 @@ export class PrinterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  printCheck(){
-    this.printHtml(this.checkId, "check");
+  printReceipt(){
+    this.printHtml(this.receiptId, "receipt");
   }
   printInvoice(){
     this.printHtml(this.invoiceId, "invoice");
