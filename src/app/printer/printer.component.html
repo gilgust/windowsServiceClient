@@ -1,17 +1,87 @@
-<div class="invoice" [id]="elementId">
-    <h3>test invoice</h3>
-    <ul>
-        <li>item 1</li>
-        <li>item 2</li>
-        <li>item 3</li>
-        <li>item 4</li>
-        <li>item 5</li>
-        <li>item 6</li>
-        <li>item 7</li>
-        <li>item 8</li>
-        <li>item 9</li>
-    </ul>
-    
+<div class="receipt" [id]="checkId">
+  <div class="item_center content-center">
+    <p>Company name</p>
+    <p>Welcome!</p>
+  </div>
+  <span class="item_right">Document №00370218</span>
+  <span class="item_center text_upper-case">==== Paymnet document ====</span>
+  <span class="item_left">sales receipt 36/893</span>
+
+  <div class="chceck_separator"></div>
+  <div class="content-center">
+    <p>Minsk, st.Pushkina,  3a</p>
+    <p>Working hours 9.00 - 22.00</p>
+    <p>Hot line +375 29 000 00 00</p>
+    <p>Employee: <span>Tom Smit</span></p>
+  </div>
+  <ul class="prudcts_wrapper">
+    <li class="product">
+      <p class="product-code">090909</p>
+      <p class="product-title">Lorem ipsum dolor sit amet.</p>
+      <p class="product-price">125,50</p>
+    </li>
+    <li class="product">
+      <p class="product-code">090909</p>
+      <p class="product-title">Lorem ipsum dolor sit amet.</p>
+      <p class="product-price">125,50</p>
+    </li>
+    <li class="product">
+      <p class="product-code">090909</p>
+      <p class="product-title">Lorem ipsum dolor sit amet.</p>
+      <p class="product-price">125,50</p>
+    </li>
+    <li class="product">
+      <p class="product-code">090909</p>
+      <p class="product-title">Lorem ipsum dolor sit amet.</p>
+      <p class="product-price">125,50</p>
+    </li>
+  </ul>
+  <div class="chceck_separator"></div>
+  <div class="content-center">
+    <p>Shop "ShopTitle"</p>
+    <p>Minsk, st.Pushkina,  3a</p>
+    <p>Terminal <span class="text_upper-case">shj21529</span></p>
+    <p class="text_upper-case">*For client*</p>
+    <p class="text_upper-case">payment</p>
+  </div>
+  <div class="content-justify_between">
+    <p class="">28.04.2021</p>
+    <p class="">12:12:22</p>
+  </div>
+  <p class="text_upper-case">Card: <span>**** **** **** 1111</span></p>
+  <p>Mastercard</p>
+  <p class="text_upper-case">a00000000041010</p>
+  <div class="chceck_separator-thin"></div>
+  <div class="content-justify_between">
+    <p>Transaction amount:</p>
+    <p>1000.20</p>
+  </div>
+  <div class="chceck_separator-thin"></div>
+  <div class="content-justify_between">
+    <p>Code AUT.: <span>120024</span></p>
+    <p>RRN: <span>111809866516</span></p>
+  </div>
+  <p>Receipt: <span>111809866516</span></p>
+  <div class="content-center">
+    <p class="text_upper-case">code: <span>000</span></p>
+    <p class="text_upper-case">approved</p>
+  </div>
+  <div class="chceck_separator-thin"></div>
+  <p>the validity of the card is confirmed by a PIN code</p>
+  <div class="chceck_separator"></div>
+  <div class="content-justify_between">
+    <p>Total payable: </p>
+    <p>10000.25</p>
+  </div>
+  <div class="content-justify_between">
+    <p>Paid: <span>(by card)</span></p>
+    <p>10000.25</p>
+  </div>
+  <p>Employee: <span>Tom Smit</span></p>
 </div>
-<button (click)="printWindow()" class="print-btn">printWindow invoice</button>
-<button (click)="reconnecting()" class="print-btn">reconnecting</button>
+
+<div class="btn-wrapper">
+  <button (click)="printCheck()" class="print-btn">printWindow invoice</button>
+  <button (click)="reconnecting()" class="print-btn">reconnecting</button>
+</div>
+

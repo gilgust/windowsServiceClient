@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {WebsocketService} from './../services/websocket.service';
-import QueryModel from './../models/QueryModel';
+import PrintQueryModel from './../models/PrintQueryModel';
 
 @Component({
   selector: 'app-printer',
@@ -8,20 +8,26 @@ import QueryModel from './../models/QueryModel';
   styleUrls: ['./printer.component.scss']
 })
 export class PrinterComponent implements OnInit {
-  
-  elementId = 'invoice';
-  constructor(private webService: WebsocketService) { 
+
+  checkId = 'check';
+  invoiceId = 'invoice';
+  constructor(private webService: WebsocketService) {
   }
 
   ngOnInit(): void {
   }
 
-  printWindow(){
-    console.log('PrinterComponent.printWindow()');
+  printCheck(){
+    this.printHtml(this.checkId, "check");
+  }
+  printInvoice(){
+    this.printHtml(this.invoiceId, "invoice");
+  }
 
-    let check = document.getElementById('invoice');
-    let model = new QueryModel('printHtml');
-    model.data  = check !== null ? check.innerHTML : '';
+  printHtml(id: string, printDataType: string){
+    let souce = document.getElementById(id);
+    let model = new PrintQueryModel('printHtml', printDataType);
+    model.data  = souce !== null ? souce.innerHTML : '';
     console.log(JSON.stringify(model));
 
     this.webService.send(model);

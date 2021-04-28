@@ -1,3 +1,85 @@
+p{
+  margin: 0;
+  padding: 0;
+}
+//receipt
+.receipt{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  padding: 1rem;
+  width: 80mm;
+  background-color: white;
+
+  font-family: monospace;
+}
+.chceck_separator{
+overflow: hidden;
+}
+.chceck_separator::after{
+  content: "======================================";
+  white-space: nowrap;
+}
+.chceck_separator-thin{
+  overflow: hidden;
+
+}
+.chceck_separator-thin::after{
+  content: "--------------------------------------";
+  white-space: nowrap;
+}
+//item
+.item_center{
+  align-self: center;
+}
+.item_left{
+  align-self: flex-start;
+}
+.item_right{
+  align-self: flex-end;
+}
+.content-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.content-justify_between{
+  display: flex;
+  justify-content: space-between;
+}
+//prudcts
+.prudcts_wrapper{
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.product{
+  display: flex;
+  flex-direction: row;
+
+}
+.product-code{
+align-self: flex-start;
+}
+.product-title{
+  align-self: stretch;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.product-price{
+  align-self: flex-start;
+  justify-self: flex-start;
+}
+//text
+.text_upper-case{
+  text-transform: uppercase;
+}
+
+
+
+
 .invoice{
     background-color: rgba(207, 207, 207, 0.133);
     border-radius: 4px;
@@ -9,4 +91,8 @@
     max-width: 300px;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.btn-wrapper{
+  margin-top: 50px;
 }

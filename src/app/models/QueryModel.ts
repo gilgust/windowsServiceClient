@@ -1,4 +1,4 @@
-export default class QueryModel implements IQueryModel{
+export default class QueryModel{
     action: string;
     data?: any;
 
@@ -6,7 +6,8 @@ export default class QueryModel implements IQueryModel{
         this.action = action;
     }
 }
-export interface IQueryModel {
-    action : string;
-    data?: any;
+
+export enum PrintDataType {
+  Check = 1,
+  Invoice = 2
 }
