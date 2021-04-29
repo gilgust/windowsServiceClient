@@ -1,5 +1,5 @@
 <div *ngIf="receiptIsShowing">
-  <app-receipt-view [id]="receiptId"></app-receipt-view>
+  <app-receipt-view [id]="receiptId" class="fix-left"></app-receipt-view>
 </div>
 
 <div *ngIf="invoiceIsShowing">
@@ -11,7 +11,8 @@
 <div class="btn-wrapper">
   <button (click)="displayReceipt()" class="print-btn">display receipt</button>
   <button (click)="displayInvoice()" class="print-btn">display invoice</button>
-  <button (click)="printReceipt()" class="print-btn">printWindow invoice</button>
+  <button (click)="printReceipt()" class="print-btn">print receipt</button>
+  <button (click)="printInvoice()" class="print-btn">print invoice</button>
   <button (click)="reconnecting()" class="print-btn">reconnecting</button>
   <button (click)="startScanning()" class="print-btn">scann</button>
 </div>

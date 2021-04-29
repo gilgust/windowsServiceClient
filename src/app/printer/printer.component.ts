@@ -33,11 +33,22 @@ export class PrinterComponent implements OnInit {
   }
 
   printHtml(id: string, printDataType: string){
+
     let souce = document.getElementById(id);
     let model = new PrintQueryModel('printHtml', printDataType);
-    model.data  = souce !== null ? souce.innerHTML : '';
-
+    model.data  = souce !== null ? this.getPageStyles() + souce.innerHTML : '';
     this.webService.send(model);
+  }
+  getPageStyles(){
+    let styles = document.querySelectorAll('head style');
+    let styleHtml = "<style>";
+
+    styles?.forEach(element =>  {
+      styleHtml += element.textContent;
+    });
+    styleHtml += "</style>";
+
+    return styleHtml;
   }
 
   startScanning(){
