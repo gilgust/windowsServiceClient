@@ -7,11 +7,15 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { PrinterComponent } from './printer/printer.component';
 import { FormsModule } from '@angular/forms';
+import { ReceiptViewComponent } from './receipt-view/receipt-view.component';
+import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PrinterComponent
+    PrinterComponent,
+    ReceiptViewComponent,
+    InvoiceViewComponent
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,7 @@ export class WebsocketService {
     this.retry = 5;
     this.subject = webSocket("ws://localhost:8998");
     this.setSubsribe();   
-    this.checkConnection(); 
+    // this.checkConnection(); 
   }
 
   handleMessage(message: any){
@@ -30,31 +30,31 @@ export class WebsocketService {
     this.subject.next(data);
   }
 
-  checkConnection(){
-    let connectionPromise =  new Promise((resolve, reject) => {
-      let data  = new QueryModel("checkConnection");
-      this.subject.next(data);
-      resolve(null);
-    });
-    connectionPromise
-    .then(()  => {
-      if(this.retry > 0 ){     
-        setTimeout(() => this.checkConnection(), 2000);
-      }
-    })
-    .catch(err => {
-      this.retry--;
-      if(this.subject.closed && this.retry > 0 ){
-        console.log(`retry: ${this.retry}`, err);
-        this.connecting();
-      }
-    });
-  }
+  // checkConnection(){
+  //   let connectionPromise =  new Promise((resolve, reject) => {
+  //     let data  = new QueryModel("checkConnection");
+  //     this.subject.next(data);
+  //     resolve(null);
+  //   });
+  //   connectionPromise
+  //   .then(()  => {
+  //     if(this.retry > 0 ){     
+  //       setTimeout(() => this.checkConnection(), 2000);
+  //     }
+  //   })
+  //   .catch(err => {
+  //     this.retry--;
+  //     if(this.subject.closed && this.retry > 0 ){
+  //       console.log(`retry: ${this.retry}`, err);
+  //       this.connecting();
+  //     }
+  //   });
+  // }
 
   connecting(){
     this.subject = webSocket("ws://localhost:8998");
     this.setSubsribe();
-    this.checkConnection();
+    // this.checkConnection();
   }
 
   private setSubsribe(){
