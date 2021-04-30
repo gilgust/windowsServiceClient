@@ -12,7 +12,7 @@ export class PrinterComponent implements OnInit {
 
   receiptId = 'receipt';
   invoiceId = 'invoice';
-  receiptIsShowing = true;
+  receiptIsShowing = false;
   constructor(private webService: WebsocketService) {
   }
 
